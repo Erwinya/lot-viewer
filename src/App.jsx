@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { aggregate, parseCsv, summarize } from "./lib/metrics.js";
+import { summaryExportFilename } from "./lib/export.js";
 import SeriesTable from "./components/SeriesTable.jsx";
 import SeriesDetail from "./components/SeriesDetail.jsx";
 import "./App.css";
@@ -83,7 +84,7 @@ export default function App() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "lot-summary.json";
+    a.download = summaryExportFilename();
     a.click();
     URL.revokeObjectURL(url);
   }
