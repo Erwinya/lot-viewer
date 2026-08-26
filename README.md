@@ -1,52 +1,41 @@
+# lot-viewer
 
-# halukkilincercom
+Browser viewer for **lot / inspection CSV** metrics with **MAD outlier** flags.
 
-## About the Backend
+Repository: [Erwinya/lot-viewer](https://github.com/Erwinya/lot-viewer)
 
-This project is the backend application for the halukkilincer.com website. It is developed with Spring Boot and provides the following main features:
+Companion CLI: [lot-metrics](https://github.com/Erwinya/lot-metrics)
 
-- RESTful API for data delivery
-- User and content management
-- Security and error handling
-- Easy configuration and extensible architecture
+## Features
 
-### Getting Started
+- Upload CSV or load the bundled sample
+- Aggregate by `lot_id` + `metric` (count, min, max, mean, stdev)
+- Modified z-score (MAD) outlier detection with adjustable sigma
+- Sparkline + point table for the selected series
+- Export summary JSON (compatible shape with `lot-metrics --json`)
 
-To start the backend, follow these steps:
+## CSV columns
 
-1. Make sure Java 17+ is installed.
-2. Open a terminal in the project directory.
-3. Run `./mvnw spring-boot:run`.
-
-### Configuration
-
-All configurations are located in `backend/src/main/resources/application.properties`.
-
-### Folder Structure
-
-```
-backend/
-├── src/main/java/com/halukkilincer/backend
-│   ├── controller/   # API endpoints
-│   ├── service/      # Business logic
-│   ├── repository/   # Data access
-│   └── entitiy/      # Data models
-└── src/main/resources
-	├── static/       # Static files
-	└── templates/    # Templates
+```text
+timestamp,lot_id,metric,value
 ```
 
-### Testing
+## Run
 
-Tests are located under `backend/src/test/java/com/halukkilincer/backend`. To run tests:
-
+```bash
+npm install
+npm run dev
 ```
-./mvnw test
+
+Open http://localhost:5175
+
+## Build / test
+
+```bash
+npm test
+npm run build
 ```
 
-### Contribution
+## License
 
-To contribute, please create a pull request.
-
----
-Feel free to reach out if you have any questions.
+MIT
