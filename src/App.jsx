@@ -12,13 +12,16 @@ export default function App() {
   const [error, setError] = useState("");
   const [selectedKey, setSelectedKey] = useState("");
 
-  const series = useMemo(() => {
-    if (!rawText) return [];
+  const { series, parseError } = useMemo(() => {
+    if (!rawText) return { series: [], parseError: "" };
     try {
+      if (sigma <= 0) {
+        throw new Error("Sigma must be greater than 0");
+      }
       const readings = parseCsv(rawText);
-      return aggregate(readings, sigma);
-    } catch {
-      return [];
+      return { series: aggregate(readings, sigma), parseError: "" };
+    } catch (err) {
+      return { series: [], parseError: err.message || String(err) };
     }
   }, [rawText, sigma]);
 
@@ -122,7 +125,7 @@ export default function App() {
               min="0.1"
               step="0.1"
               value={sigma}
-              onChange={(e) => setSigma(Number(e.target.value) || 3.5)}
+              onChange={(e) => setSigma(Number(e.target.value))}
             />
           </label>
         </div>
@@ -132,7 +135,7 @@ export default function App() {
               ? `${sourceLabel} · series=${summary.seriesCount} · outliers=${summary.outlierPoints}`
               : "No file loaded"}
           </span>
-          {error ? <span className="error">{error}</span> : null}
+          {error || parseError ? <span className="error">{error || parseError}</span> : null}
         </div>
       </section>
 

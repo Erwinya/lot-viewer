@@ -100,6 +100,9 @@ function modifiedZ(values) {
 }
 
 export function aggregate(readings, sigma = 3.5) {
+  if (sigma <= 0) {
+    throw new Error("Sigma must be greater than 0");
+  }
   const buckets = new Map();
   for (const r of readings) {
     const key = `${r.lotId}||${r.metric}`;
