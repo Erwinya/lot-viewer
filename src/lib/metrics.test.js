@@ -19,4 +19,9 @@ describe("metrics", () => {
     expect(series[0].outliers.length).toBeGreaterThan(0);
     expect(series[0].outliers.some((o) => o.value === 128.5)).toBe(true);
   });
+
+  it("rejects non-positive sigma values", () => {
+    const readings = parseCsv(sample);
+    expect(() => aggregate(readings, 0)).toThrow("Sigma must be greater than 0");
+  });
 });
