@@ -27,6 +27,13 @@ npm install
 npm run dev
 ```
 
+Windows PowerShell:
+
+```powershell
+npm install
+npm run dev
+```
+
 Open http://localhost:5175
 
 ## Build / test
