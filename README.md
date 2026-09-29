@@ -43,6 +43,13 @@ npm test
 npm run build
 ```
 
+Windows PowerShell:
+
+```powershell
+npm test
+npm run build
+```
+
 ## License
 
 MIT
